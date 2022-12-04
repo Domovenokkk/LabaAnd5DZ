@@ -91,13 +91,17 @@ void RandomArray(int* array, int size) {
     }
 }
 
-int ArrayFromFile(int** array, int* size, int language) {
+void PrintDir(char* dir[], int language) {
+    printf(language == 0 ? "Введите путь к вашему файлу. Например: D:\\github_files\\source\\\n" : "Enter the path to your file. For example: D:\\github_files\\source\\\n");
+    printf("Вводите: ");
+    gets(dir);
+}
+
+int ArrayFromFile(int** array, int* size, char dir[], int language) {
     char filename[100];
     char filepath[200];
-    char dir[100];
-    printf(language == 0 ? "Введите путь к вашему файлу. Например: D:\\github_files\\source\\\n" : "Enter the path to your file. For example: D:\\github_files\\source\\\n");
-    gets(dir);
     printf(language == 0 ? "Введите название файла. Например: input.txt\n" : "Enter a file name. For example: input.txt\n");
+    printf("Вводите: ");
     gets(filename);
     strcpy_s(filepath, sizeof filepath, dir);
     strncat_s(filepath, 100, filename, 100);
@@ -122,7 +126,7 @@ int ArrayFromFile(int** array, int* size, int language) {
             }
         }
         fclose(input_file);
-        printf(language == 0 ? "Полученный массив" : "Resulting array: \n");
+        printf(language == 0 ? "Полученный массив: " : "Resulting array: \n");
         for (int i = 0; i < size1; i++) {
             printf("%d ", mass[i]);
         }
@@ -304,11 +308,10 @@ int main() {
     char* algorithms[TWO_SIZE][THREE_SIZE] = { { "Поиск", "Сортировки", "Назад" }, { "Search","Sorts","Back" } };
     char* search[TWO_SIZE][THREE_SIZE] = { { "Наивный поиск","Бинарный поиск", "Назад" }, { "Stupid search","Binary search","Back" } };
     char* sorts[TWO_SIZE][FIVE_SIZE] = { { "Пузырьковая сортировка","Сортировка вставками", "Сортировка слиянием", "Сортировка Шелла" ,"Назад" }, { "Bubble sort","Insertion sort", "Merger sort", "Shello sort", "Back"} };
-    char* settings[TWO_SIZE][FOUR_SIZE] = { {"Язык", "Задать массив", "Посмотреть текущий массив", "Назад"}, {"Language","Set array","Check our array","Back"} };
+    char* settings[TWO_SIZE][FIVE_SIZE] = { {"Язык", "Задать массив", "Посмотреть текущий массив", "Изменить путь до рабочей директории" ,"Назад"}, {"Language","Set array","Check our array", "Change the path to the working directory" ,"Back"}};
     char* setarrayact[TWO_SIZE][FOUR_SIZE] = { {"Ручной ввод","Рандомный ввод","Прочитать из файла", "Назад"}, {"Manual enter","Random array","Read from file", "Back"} };
 
     char* lngs[TWO_SIZE] = { "Русский","English" };
-
     int* array = NULL;
     int arrsize = -1;
 
@@ -405,7 +408,9 @@ int main() {
                             PrintArray(array, arrsize, language);
                             system("pause");
                             break;
-                        case 4: //Back
+                        case 4:
+
+                        case 5: //Back
                             incase_flag = 1;
                             break;
                         }
@@ -422,7 +427,7 @@ int main() {
             incase_flag = 1;
             while (incase_flag >= 1) {
                 system("cls");
-                GenerateMenu(&choose_pos, settings[language], &cursorPos, hStdOut, FOUR_SIZE, NONE_TITLE);
+                GenerateMenu(&choose_pos, settings[language], &cursorPos, hStdOut, FIVE_SIZE, NONE_TITLE);
                 switch (choose_pos) {
                 case 0: // lang
                     system("cls");
@@ -457,7 +462,8 @@ int main() {
                             break;
                         case 2: // read from file
                             system("cls");
-                            ArrayFromFile(&array, &arrsize, language);
+                            PrintDir(dir, language);
+                            ArrayFromFile(&array, &arrsize, dir, language);
                             system("pause");
                             incase_flag = 1;
                             break;
