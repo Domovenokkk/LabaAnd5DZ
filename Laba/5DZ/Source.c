@@ -112,7 +112,7 @@ void Input(struct TV* size) {
 	scanf_s("%d", &(*size).width);
 	printf("Введите высоту телевизора: ");
 	scanf_s("%d", &(*size).height);
-	printf("Введите высоту телевизора: ");
+	printf("Введите толщину телевизора: ");
 	scanf_s("%d", &(*size).depth);
 }
 void diagonal(struct TV* size) {
@@ -137,10 +137,6 @@ void volume(struct TV* size) {
 	volume = height * width * depth;
 	printf("\nОбъем телевизора: %d", volume);
 }
-void FIOfam(struct FIO* names) {
-	printf("Введите фамилию - ");
-	getchar((*names).surname);
-}
 int main()
 {
 	setlocale(LC_ALL, "russian");
@@ -148,6 +144,11 @@ int main()
 	struct CabinetDimensions cabineet = { 50, 50, 50};
 	struct FIO ya = { "Межуев", "Максим", "Евгеньевич" };
 	struct Data rightnow = { 22, 12,  04};
+	struct BJUK ya3 = { 11, 22, 33, 10.5 };
+	struct Notebook TETRAD = { "Адидас", "Клеточка", 48, 4 };
+	struct Body ya1 = { 11, 22, 33, 44, 55, 66 };
+	struct Student ya2 = { {"Межуев", "Махим", "Евгенич"}, {29, 01, 2005}, 0.0, 1, 1 };
+
 	printf("Размер шкафа: %d %d %d\n", cabineet.depth, cabineet.height, cabineet.width);
 	printf("Мое ФИО: %s %s %s\n", ya.surname, ya.name, ya.patronymic);
 	printf("Дата: %d %d %d\n", rightnow.day, rightnow.month, rightnow.year);
