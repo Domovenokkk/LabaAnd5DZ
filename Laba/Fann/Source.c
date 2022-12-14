@@ -12,6 +12,5 @@ int main()
     scanf_s("%d", &N); 
     for (int i = 1; i <= N; i++) 
         printf("%d ", fibon(i));
-    getchar(); getchar();
     return 0;
 }
