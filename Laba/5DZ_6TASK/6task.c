@@ -53,6 +53,10 @@ float calculateCost(struct Dimension size, float cupboardCost, float consumption
 	float full_price = calculatePaintingCost(size, consumption, workCost, paintCost) + calculateCupboardCost(size, cupboardCost) + LiftCost(size, weight, floorsCount, riseCost) + deliveryCost;
 	return full_price;
 }
+float calculateNalog(struct Dimension size, float cupboardCost, float consumption, float paintCost, float workCost, float weight, int floorsCount, float riseCost, float deliveryCost) {
+	float NalogCost = calculateCost(size, cupboardCost, consumption, paintCost, workCost, weight, floorsCount, riseCost, deliveryCost) * 0.13;
+	return NalogCost;
+}
 int main() {
 	setlocale(LC_ALL, "russian");
 	float paintConsumption = 0.8, paintWorkCost = 35.00, paintCost = 50.00;
@@ -64,11 +68,12 @@ int main() {
 	struct Dimension size;
 	printf("Введите параметры шкафа: \n");
 	Input(&size);
-	float cost, cupboard_cost, painting_cost, delivery_cost;
-	cost = calculateCost(size, cupboardCost, paintConsumption, paintCost, paintWorkCost, weight, floorsCount, riseCost, deliveryCost);
+	float cost, cupboard_cost, painting_cost, delivery_cost, NalogCost;
 	cupboard_cost = calculateCupboardCost(size, cupboardCost);
 	painting_cost = calculatePaintingCost(size, paintConsumption, paintWorkCost, paintCost);
 	delivery_cost = LiftCost(size, weight, floorsCount, riseCost) + deliveryCost;
-	printf("Промежуточный расчет:\n  - Стоимость шкафа: %.2f\n  - Стоимость покраски: %.2f\n  - Стоимость доставки(с подъемом): %.2f:\nИтоговая цена: %.2f", cupboard_cost, painting_cost, delivery_cost, cost);
+	NalogCost = calculateNalog(size, cupboardCost, paintConsumption, paintCost, paintWorkCost, weight, floorsCount, riseCost, deliveryCost);
+	cost = calculateCost(size, cupboardCost, paintConsumption, paintCost, paintWorkCost, weight, floorsCount, riseCost, deliveryCost) + NalogCost;
+	printf("Промежуточный расчет:\n  - Стоимость шкафа: %.2f\n  - Стоимость покраски: %.2f\n  - Стоимость доставки(с подъемом): %.2f\n  - Налог: %.2f\nИтоговая цена: %.2f", cupboard_cost, painting_cost, delivery_cost, NalogCost,  cost);
 	return 0;
 }

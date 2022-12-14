@@ -543,7 +543,7 @@ int main() {
         {"Language","Set array","Check our array", "Change the path to the working directory" ,"Back"}};
     
     char* setarrayact[TWO_SIZE][FOUR_SIZE] = {
-        {"Ручной ввод","Рандомный ввод","Прочитать из файла", "Назад"}, 
+        {"Ручной ввод","Сгенерировать случайно","Прочитать из файла", "Назад"}, 
         {"Manual enter","Random array","Read from file", "Back"} };
     
     char* exp[TWO_SIZE][THREE_SIZE] = {
